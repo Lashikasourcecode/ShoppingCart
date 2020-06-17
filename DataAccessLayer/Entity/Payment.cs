@@ -10,7 +10,7 @@ namespace DataAccessLayer.Model
     public class Payment
     {
         [Key]
-        public int PaymentId { get; set; }
+        public int PayamentId { get; set; }
         public double Amount { get; set; }
 
         public string PaymentMethod { get; set; }
