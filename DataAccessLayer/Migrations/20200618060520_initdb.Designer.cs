@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(ShoppingCartDBContext))]
-    [Migration("20200616074549_initdb")]
+    [Migration("20200618060520_initdb")]
     partial class initdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -139,7 +139,7 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DataAccessLayer.Model.Payment", b =>
                 {
-                    b.Property<int>("PaymentId")
+                    b.Property<int>("PayamentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -153,7 +153,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("PaymentMethod")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PaymentId");
+                    b.HasKey("PayamentId");
 
                     b.HasIndex("Order");
 
@@ -185,8 +185,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<double>("UnitPrice")
                         .HasColumnType("float");
 
-                    b.Property<byte[]>("image")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ProductId");
 
@@ -229,7 +229,7 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DataAccessLayer.Model.Product", b =>
                 {
-                    b.HasOne("DataAccessLayer.Model.Category", "categories")
+                    b.HasOne("DataAccessLayer.Model.Category", "Categories")
                         .WithMany("products")
                         .HasForeignKey("Category");
                 });

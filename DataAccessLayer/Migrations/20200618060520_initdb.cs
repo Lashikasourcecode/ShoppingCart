@@ -30,7 +30,7 @@ namespace DataAccessLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductName = table.Column<int>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
-                    image = table.Column<byte[]>(nullable: true),
+                    image = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     UnitPrice = table.Column<double>(nullable: false),
                     Discount = table.Column<double>(nullable: false),
@@ -95,7 +95,7 @@ namespace DataAccessLayer.Migrations
                 name: "Payments",
                 columns: table => new
                 {
-                    PaymentId = table.Column<int>(nullable: false)
+                    PayamentId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<double>(nullable: false),
                     PaymentMethod = table.Column<string>(nullable: true),
@@ -103,7 +103,7 @@ namespace DataAccessLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Payments", x => x.PaymentId);
+                    table.PrimaryKey("PK_Payments", x => x.PayamentId);
                 });
 
             migrationBuilder.CreateTable(
@@ -123,7 +123,7 @@ namespace DataAccessLayer.Migrations
                         name: "FK_Orders_Payments_Payment",
                         column: x => x.Payment,
                         principalTable: "Payments",
-                        principalColumn: "PaymentId",
+                        principalColumn: "PayamentId",
                         onDelete: ReferentialAction.Restrict);
                 });
 

@@ -14,10 +14,12 @@ namespace DataAccessLayer.DBContext
             var optionsBuilder = new DbContextOptionsBuilder<ShoppingCartDBContext>();
 
             AppConfigurations appConfig = new AppConfigurations();
-           // optionsBuilder.UseSqlServer("Server = DESKTOP-2TP9V4V; Database = ShoppingCart; Trusted_Connection = True; MultipleActiveResultSets = true");
+           
             optionsBuilder.UseSqlServer(appConfig.SQLConnection);
+
             return new ShoppingCartDBContext(optionsBuilder.Options);
         }
+
            // public ShoppingCartDBContext CreateShoppingCartDBContext(string[] args)
            // {
            // AppConfigurations appConfig = new AppConfigurations();
