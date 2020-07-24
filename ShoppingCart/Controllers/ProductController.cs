@@ -7,14 +7,16 @@ using BusinessLayer.PropertyClass;
 using DataAccessLayer.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using BusinessLayer.BussinessLogic;
 
 namespace ShoppingCart.Controllers
 {
-    [Route("api/[products]")]
+    
     [ApiController]
+    [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
-        private AccessProduct accessProduct = new AccessProduct();
+        private ProductListLogic accessProduct = new ProductListLogic();
 
         [Route("getproduct")]
         [HttpGet]
@@ -45,7 +47,7 @@ namespace ShoppingCart.Controllers
 
                 }
             }
-
+            
             return productDetailslist;
 
         }
@@ -53,3 +55,4 @@ namespace ShoppingCart.Controllers
 
     }
 }
+

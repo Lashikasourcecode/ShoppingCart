@@ -6,16 +6,14 @@ using DataAccessLayer.Interface;
 using DataAccessLayer.Model;
 using System.Data;
 
-
-namespace BusinessLayer
+namespace BusinessLayer.BussinessLogic
 {
-    public class AccessProduct
+   public  class ProductListLogic
     {
-
         private IProducts _productlist = new DataAccessLayer.Function.ShoppingCartDBFunction();
 
         //public DataAccessLayer dataAccess = new DataAccessLayer()
-                        
+
 
         public async Task<List<Product>> GetAllProduct()
         {

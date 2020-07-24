@@ -174,8 +174,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<double>("Discount")
                         .HasColumnType("float");
 
-                    b.Property<int>("ProductName")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");

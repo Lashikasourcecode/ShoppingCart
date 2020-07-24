@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using System.ComponentModel;
 using DataAccessLayer.Model;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace DataAccessLayer.DBContext
 {

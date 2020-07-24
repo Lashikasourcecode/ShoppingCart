@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class initdb : Migration
+    public partial class InitDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,7 @@ namespace DataAccessLayer.Migrations
                 {
                     ProductId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<int>(nullable: false),
+                    ProductName = table.Column<string>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
                     image = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
