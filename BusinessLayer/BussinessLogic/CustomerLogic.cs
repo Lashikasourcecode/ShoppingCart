@@ -43,7 +43,6 @@ namespace BusinessLayer.BussinessLogic
                         Email = customerDetails.Email,
                         BilingAddress = customerDetails.BilingAddress,
                         Password = encryptedPassword,
-                        // Password = System.Text.Encoding.UTF8.GetBytes(customerDetails.Password.ToString()),
                         DeliveryAddress = customerDetails.DeliveryAddress,
                         DeleveryCity = customerDetails.DeliveryCity,
                         MobileNo =customerDetails.MobileNo,
