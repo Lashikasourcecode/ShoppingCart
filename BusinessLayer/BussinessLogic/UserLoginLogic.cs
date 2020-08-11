@@ -58,9 +58,10 @@ namespace BusinessLayer.BussinessLogic
         {
             // generate token that is valid for 7 days
             var tokenHandler = new JwtSecurityTokenHandler();
-            
-            
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+
+
+            // var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var key = Encoding.ASCII.GetBytes(Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("id", user.CustomerId.ToString()) }),

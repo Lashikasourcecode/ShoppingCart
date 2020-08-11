@@ -10,5 +10,7 @@ namespace BusinessLayer.Interface
     {
         public Task<bool> addCustomer(CustomerDetails customerDetails);
 
+        
+
     }
 }

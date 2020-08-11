@@ -18,7 +18,7 @@ namespace BusinessLayer.BussinessLogic
 
         //public DataAccessLayer dataAccess = new DataAccessLayer()
 
-
+        public byte[] password;
         public async Task<bool> addCustomer(CustomerDetails customerDetails)
         {
             try {
@@ -29,6 +29,12 @@ namespace BusinessLayer.BussinessLogic
 
                 if (customeravailability == null)
                 {
+                    byte[] passToHash;
+                    string encryptedPassword = "";
+
+                    passToHash = System.Text.Encoding.UTF8.GetBytes(customerDetails.Password);// string password convert to byte array
+                    encryptedPassword = Shared.shared.Hash(passToHash);// call passwrod encryption menthod
+
 
                     Customer cus = new Customer
                     {
@@ -36,9 +42,11 @@ namespace BusinessLayer.BussinessLogic
                         LastName = customerDetails.LastName,
                         Email = customerDetails.Email,
                         BilingAddress = customerDetails.BilingAddress,
-                        Password = customerDetails.Password,
+                        Password = encryptedPassword,
+                        // Password = System.Text.Encoding.UTF8.GetBytes(customerDetails.Password.ToString()),
                         DeliveryAddress = customerDetails.DeliveryAddress,
                         DeleveryCity = customerDetails.DeliveryCity,
+                        MobileNo =customerDetails.MobileNo,
 
 
 

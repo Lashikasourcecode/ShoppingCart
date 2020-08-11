@@ -41,6 +41,7 @@ namespace ShoppingCart
             //services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICheckoutService, CheckOutService>();
 
 
             var key = Encoding.ASCII.GetBytes("THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING");

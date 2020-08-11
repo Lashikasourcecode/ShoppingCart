@@ -15,10 +15,10 @@ namespace DataAccessLayer.DBContext
         {
            // string path = "C:/Users/Lashika/source/repos/Online Shopping Cart\Online Shopping Cart\appsetting.json";
             var configBuilder = new ConfigurationBuilder();
-             var path = Path.Combine(Directory.GetCurrentDirectory(),"appsettings.json");
+            var path = Path.Combine(Directory.GetCurrentDirectory(),"appsettings.json");
            // configBuilder.SetBasePath(Directory.GetCurrentDirectory());
-             configBuilder.AddJsonFile(path, false);
-             configBuilder.AddJsonFile("appsettings.json");
+            configBuilder.AddJsonFile(path, false);
+            configBuilder.AddJsonFile("appsettings.json");
             var root = configBuilder.Build();
             var appsetting = root.GetSection("ConnectionString:DefaultConnection");
             SQLConnection = appsetting.Value;
