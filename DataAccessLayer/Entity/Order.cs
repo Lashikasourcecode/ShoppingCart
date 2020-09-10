@@ -15,9 +15,13 @@ namespace DataAccessLayer.Model
 
         public double Total { get; set; }
 
-        public ICollection<Customer> customers { get; set; }
+        [ForeignKey("Customer")]
+        public virtual Customer customers { get; set; }
 
-        public ICollection<OrderDetail> orderdetails { get; set; }
+        [ForeignKey("Order")]
+        public virtual Order orders { get; set; }
+
+        public ICollection<OrderDetail> orderdetails{ get; set; }
 
         [ForeignKey("Payment")]
         public virtual Payment Payments { get; set; }

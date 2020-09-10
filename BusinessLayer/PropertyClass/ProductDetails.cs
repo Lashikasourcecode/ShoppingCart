@@ -17,6 +17,10 @@ namespace BusinessLayer.PropertyClass
 
        // public List<ProductDetails> cartproductlist { get; set; }
 
+        public List<PaymentConformation> payment { get; set; } 
+
+        
+
     }
 
     

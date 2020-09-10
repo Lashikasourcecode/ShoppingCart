@@ -26,16 +26,18 @@ namespace ShoppingCart.Controllers
 
         [Route("addCustomer")]
         [HttpPost]
-        public async Task<bool>  AddCustomerDetails(CustomerDetails customer)
-        {
+        public async  Task<bool>  AddCustomerDetails(CustomerDetails customer)
+         {
 
-            bool status = await icustomerService.addCustomer(customer);
+            bool status = await  icustomerService.addCustomer(customer);
 
             return status;
-
             
 
         }
+
+       
+
 
     }
 }

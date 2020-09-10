@@ -20,6 +20,11 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using BusinessLayer.PropertyClass;
+using BusinessLayer.PropertyClass.MailSetting;
+using BusinessLayer.Services;
+using NETCore.MailKit.Core;
+using MailKit;
 
 namespace ShoppingCart
 {
@@ -35,13 +40,39 @@ namespace ShoppingCart
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            //code for send email
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+           // services.AddTransient<IMailServicea,Service.MailService>();
+           // BusinessLayer.Services.MailService;
+           // services.AddScoped<IMailService,MailService>();
+            services.AddControllers();
+            // services.AddControllers();
+            //
             services.AddControllers();
             services.AddCors();
+
+            ////Email sender
+            var emailConfig = Configuration
+            .GetSection("EmailConfiguration")
+            .Get<EmailCofiguration>();
+            services.AddSingleton(emailConfig);
+            services.AddControllers();
+
+            ////Email Sender
+
+
 
             //services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICheckoutService, CheckOutService>();
+            services.AddScoped<IUserDetails, UserDetailService>();
+            //payment conformation
+            services.AddScoped<IPaymentConfService, PaymetconformationService>();
+            //send email
+            services.AddScoped<IEmailSender, EmailSender>();
+          
 
 
             var key = Encoding.ASCII.GetBytes("THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING");

@@ -17,8 +17,11 @@ namespace DataAccessLayer.Model
         public string DeleveryCity { get; set; }
         public string MobileNo { get; set; }
         public string Email { get; set; }
+        // public ICollection<Order> orderId { get; set; }
 
         //public virtual ICollection<Order> orders { get; set; }
+
+        public virtual ICollection<Order> orders { get; set; }
 
 
 

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(ShoppingCartDBContext))]
-    [Migration("20200624160051_InitDB")]
-    partial class InitDB
+    [Migration("20200828114045_Shopping")]
+    partial class Shopping
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,15 +70,10 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("MobileNo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CustomerId");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Customers");
                 });
@@ -90,8 +85,14 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("Customer")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("Order")
+                        .HasColumnType("int");
 
                     b.Property<int?>("Payment")
                         .HasColumnType("int");
@@ -100,6 +101,10 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("OrderId");
+
+                    b.HasIndex("Customer");
+
+                    b.HasIndex("Order");
 
                     b.HasIndex("Payment");
 
@@ -195,15 +200,16 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("products");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.Model.Customer", b =>
-                {
-                    b.HasOne("DataAccessLayer.Model.Order", null)
-                        .WithMany("customers")
-                        .HasForeignKey("OrderId");
-                });
-
             modelBuilder.Entity("DataAccessLayer.Model.Order", b =>
                 {
+                    b.HasOne("DataAccessLayer.Model.Customer", "customers")
+                        .WithMany("orders")
+                        .HasForeignKey("Customer");
+
+                    b.HasOne("DataAccessLayer.Model.Order", "orders")
+                        .WithMany()
+                        .HasForeignKey("Order");
+
                     b.HasOne("DataAccessLayer.Model.Payment", "Payments")
                         .WithMany()
                         .HasForeignKey("Payment");

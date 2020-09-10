@@ -30,10 +30,10 @@ namespace BusinessLayer.BussinessLogic
         {
             List<Product> prod = icheckOut.GetAllProducts();
 
+           
 
             foreach (var productsdetail in productDetails)
             {
-
                 //  productsDetailList
                 var cartproductDetaillist = prod.Where(x => x.ProductId == productsdetail.ProductId).ToList();
 
@@ -47,10 +47,13 @@ namespace BusinessLayer.BussinessLogic
 
                         productsdetail.ProductId = productsmodel.ProductId;
                         productsdetail.ProductName = productsmodel.ProductName;
+                        productsdetail.Image = productsmodel.image;
+                        productsdetail.Description = productsmodel.Description;
                         // productsdetail.Quantity = productsmodel.Quantity;
                         productsdetail.Quantity = productsdetail.Quantity;
 
-                        if (productsdetail.Quantity >= productsmodel.Quantity)
+
+                        if (productsmodel.Quantity >= productsdetail.Quantity)
                         {
 
                             productsdetail.Availability = "InStok";
@@ -78,6 +81,7 @@ namespace BusinessLayer.BussinessLogic
                     }
                     else
                     {
+                        productsdetail.Availability = "Out of Stock";
 
 
 

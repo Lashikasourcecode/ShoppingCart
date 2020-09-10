@@ -22,23 +22,41 @@ namespace ShoppingCart.Controllers
         }
 
         // List<ProductDetails> productlist = new List<ProductDetails>();
+       
         List<CartItemDetails> cartproductlist = new List<CartItemDetails>();
 
         [Route("checkproductavailabilty")]
         [HttpPost]
-        public List<CartItemDetails> checkquantity(List<CartItemDetails> products)
+        public List<CartItemDetails> checkquantity([FromBody] List<CartItemDetails> products)
          {
+            List<CartItemDetails> cartitemList = new List<CartItemDetails>();
+
              cartproductlist = icheckoutService.checkProductAvailabilty(products);
 
             if (cartproductlist != null)
             {
-                return cartproductlist;
+                foreach(var cartproduct in cartproductlist)
+                {
+                    CartItemDetails cartItemDetails = new CartItemDetails()
+                    {
+                        ProductId = cartproduct.ProductId,
+                        ProductName = cartproduct.ProductName,
+                        Quantity = cartproduct.Quantity,
+                        Image = cartproduct.Image,
+                        Description = cartproduct.Description,
+                        UnitPrice = cartproduct.UnitPrice,
+                        Availability =cartproduct.Availability,
+                        Discount = cartproduct.Discount,
+                    };
+
+                    cartitemList.Add(cartItemDetails);
+                }
 
             }
 
             //return  productlist;
 
-            return products;
+            return cartitemList.ToList();
         }
         // public ProductDetails checkquantity(ProductDetails products)
         // {

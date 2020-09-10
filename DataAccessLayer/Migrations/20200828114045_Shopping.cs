@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class InitDB : Migration
+    public partial class Shopping : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +20,26 @@ namespace DataAccessLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.CatergoryId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    CustomerId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Password = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    BilingAddress = table.Column<string>(nullable: true),
+                    DeliveryAddress = table.Column<string>(nullable: true),
+                    DeleveryCity = table.Column<string>(nullable: true),
+                    MobileNo = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
                 });
 
             migrationBuilder.CreateTable(
@@ -48,24 +68,32 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customers",
+                name: "Orders",
                 columns: table => new
                 {
-                    CustomerId = table.Column<int>(nullable: false)
+                    OrderId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Password = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    BilingAddress = table.Column<string>(nullable: true),
-                    DeliveryAddress = table.Column<string>(nullable: true),
-                    DeleveryCity = table.Column<string>(nullable: true),
-                    MobileNo = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    OrderId = table.Column<int>(nullable: true)
+                    DateTime = table.Column<DateTime>(nullable: false),
+                    Total = table.Column<double>(nullable: false),
+                    Customer = table.Column<int>(nullable: true),
+                    Order = table.Column<int>(nullable: true),
+                    Payment = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.ForeignKey(
+                        name: "FK_Orders_Customers_Customer",
+                        column: x => x.Customer,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Orders_Orders_Order",
+                        column: x => x.Order,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,6 +111,12 @@ namespace DataAccessLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderDetails", x => x.OrderDtailId);
+                    table.ForeignKey(
+                        name: "FK_OrderDetails_Orders_Order",
+                        column: x => x.Order,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_OrderDetails_products_Product",
                         column: x => x.Product,
@@ -104,33 +138,13 @@ namespace DataAccessLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Payments", x => x.PayamentId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    OrderId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DateTime = table.Column<DateTime>(nullable: false),
-                    Total = table.Column<double>(nullable: false),
-                    Payment = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.OrderId);
                     table.ForeignKey(
-                        name: "FK_Orders_Payments_Payment",
-                        column: x => x.Payment,
-                        principalTable: "Payments",
-                        principalColumn: "PayamentId",
+                        name: "FK_Payments_Orders_Order",
+                        column: x => x.Order,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Customers_OrderId",
-                table: "Customers",
-                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_Order",
@@ -141,6 +155,16 @@ namespace DataAccessLayer.Migrations
                 name: "IX_OrderDetails_Product",
                 table: "OrderDetails",
                 column: "Product");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_Customer",
+                table: "Orders",
+                column: "Customer");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_Order",
+                table: "Orders",
+                column: "Order");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_Payment",
@@ -158,27 +182,11 @@ namespace DataAccessLayer.Migrations
                 column: "Category");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Customers_Orders_OrderId",
-                table: "Customers",
-                column: "OrderId",
-                principalTable: "Orders",
-                principalColumn: "OrderId",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_OrderDetails_Orders_Order",
-                table: "OrderDetails",
-                column: "Order",
-                principalTable: "Orders",
-                principalColumn: "OrderId",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Payments_Orders_Order",
-                table: "Payments",
-                column: "Order",
-                principalTable: "Orders",
-                principalColumn: "OrderId",
+                name: "FK_Orders_Payments_Payment",
+                table: "Orders",
+                column: "Payment",
+                principalTable: "Payments",
+                principalColumn: "PayamentId",
                 onDelete: ReferentialAction.Restrict);
         }
 
@@ -187,9 +195,6 @@ namespace DataAccessLayer.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_Payments_Orders_Order",
                 table: "Payments");
-
-            migrationBuilder.DropTable(
-                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "OrderDetails");
@@ -202,6 +207,9 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Payments");

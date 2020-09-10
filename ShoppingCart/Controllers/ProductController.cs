@@ -18,6 +18,14 @@ namespace ShoppingCart.Controllers
     {
         private ProductListLogic accessProduct = new ProductListLogic();
 
+
+        //private readonly IProductService _service;//business layer reference 
+
+        //public ProductController(IProductService service)
+        //{
+        //    _service = service;
+        //}
+
         [Route("getproduct")]
         [HttpGet]
 
