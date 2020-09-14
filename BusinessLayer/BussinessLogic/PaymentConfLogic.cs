@@ -8,11 +8,12 @@ using DataAccessLayer.DBContext;
 using System.Linq;
 using BusinessLayer.PropertyClass;
 using System.Net.Mail;
-using MimeKit;
-using MailKit.Net.Smtp;
+//using MimeKit;
+//using MailKit.Net.Smtp;
 using System.Data;
 using System.IO;
 using System.Xml;
+using System.Net.Mail;
 
 namespace BusinessLayer.BussinessLogic
 {
@@ -67,6 +68,7 @@ namespace BusinessLayer.BussinessLogic
                                 orderDetail.discount = ordersdetail.discount;
                                 //
                                 // orderDetail.product = context.products.First(o => o.ProductId == cartItem.productId );
+                                orderDetail.product = context.products.First(o => o.ProductId == ordersdetail.productId);
                                 orderDetail.orders = context.Orders.First(o => o.OrderId == orderID);
 
                                 context.OrderDetails.Add(orderDetail);
@@ -97,28 +99,25 @@ namespace BusinessLayer.BussinessLogic
                         }
                         // }
                     }
-                    ////send Email
-                    ///
-
-                    //////var message = new MimeKit.MimeMessage();
-                    //////message.From.Add(new MimeKit.MailboxAddress("Test mail", "dlashika86@gmail.com"));
-                    //////message.To.Add(new MimeKit.MailboxAddress("lashika", "dlashika86@gmail.com"));
-                    //////message.Subject = "test sopping cart mail";
-                    //////// message.IsBodyHtml = true;
 
 
-                                    
-                   
 
-                        MailMessage msg = new MailMessage();
-                        // message.From = new MailAddress(Session["Email"].Tostring());
-                        // message.To.Add(ConfigurationSettings.AppSettings["RequesEmail"].ToString());
-                        msg.Subject = "Shopping Cart Oder Details ";
-                        msg.IsBodyHtml = true;
-                                    // string Body = "<p>Hello</p>";
-                       // msg.Body = Body;
 
-                   // string textBody;
+
+
+                    // MailMessage msg = new MailMessage();
+                    // message.From = new MailAddress(Session["Email"].Tostring());
+                    // message.To.Add(ConfigurationSettings.AppSettings["RequesEmail"].ToString());
+                    // msg.Subject = "Shopping Cart Oder Details ";
+                    // msg.IsBodyHtml = true;
+
+                    MailMessage mail = new MailMessage();
+                    SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                    mail.Subject = "Shopping Cart Order  ";
+                    mail.From = new MailAddress("dlashika86@gmail.com");
+                    mail.To.Add("dlashika86@gmail.com");
+                    mail.Subject = "Shopping Cart";
+
                     foreach (var pay in payments.cartItemModel)
                     {
                          ProductId = pay.productId;
@@ -149,12 +148,12 @@ namespace BusinessLayer.BussinessLogic
                         textBody += "</table> <br/><h3>Thank You</h3>";
 
                     
-                        MailMessage mail = new MailMessage();
-                        System.Net.Mail.SmtpClient SmtpServer = new System.Net.Mail.SmtpClient("smtp.gmail.com");
-
-                        mail.From = new MailAddress("dlashika86@gmail.com");
-                        mail.To.Add("dlashika86@gmail.com");
-                        mail.Subject = "Shopping Cart";
+                        //MailMessage mail = new MailMessage();
+                        //SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                        //mail.Subject = "Shopping Cart Order  ";
+                        //mail.From = new MailAddress("dlashika86@gmail.com");
+                        //mail.To.Add("dlashika86@gmail.com");
+                        //mail.Subject = "Shopping Cart";
                         mail.Body = textBody;
 
                         mail.IsBodyHtml = true;
@@ -162,38 +161,18 @@ namespace BusinessLayer.BussinessLogic
                         SmtpServer.Credentials = new System.Net.NetworkCredential("dlashika86@gmail.com", "lash1234");
                         SmtpServer.EnableSsl = true;
                         SmtpServer.Send(mail);
-                        //
-                   // }
-                    //close foreach
+                     
                }
 
 
 
 
-                  
+                      
 
                    
-
-                   
                    
 
-                    //message.Body = new MimeKit.TextPart("plain")
-                    //{
-
-                    //    Text = "Thank you shopping with us"
-
-
-                    // };
-
-
-
-                    //using (var client = new MailKit.Net.Smtp.SmtpClient())
-                    //{
-                    //    client.Connect("smtp.gmail.com",587,false);
-                    //    client.Authenticate("dlashika86@gmail.com", "lash1234");
-                    //    client.Send(message);
-                    //    client.Disconnect(true);
-                    //}
+                    
                         
 
 
@@ -201,29 +180,23 @@ namespace BusinessLayer.BussinessLogic
 
              }
                 
-                //else
-                //{
-                //    return false;
-                //}
-
-            //}
+                
             catch (Exception ex)
             {
-              // return ex.ToString();
+              
             }
 
 
 
             return true;
 
-                // foreach (var payconf in payments)
-                // {
+                
 
 
 
 
 
-                // }
+                
 
 
 
@@ -235,22 +208,6 @@ namespace BusinessLayer.BussinessLogic
         
     }
 
-    // bind Data into email template
-    //public string createBody( PaymentConformation payment)
-    //{
-         
-    //    string body = string.Empty;
-
-    //    using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailTemplate.html")))
-    //    {
-    //        body = reader.ReadToEnd();
-
-    //    }
-
-    //    body = body.Replace("{firstName}",payment.paymentMethod);
-
-
-    //    return body
-    //}
+   
 
 }
