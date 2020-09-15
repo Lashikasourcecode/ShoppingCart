@@ -22,15 +22,6 @@ namespace BusinessLayer.Services
         }
 
 
-        // ProductDetails productslist = new ProductDetails();
-
-        //public ProductDetails checkProductAvailabilty(ProductDetails productDetails)
-        //{
-        //   var productslist = checkOutLogic.checkProductAvailabilty(productDetails);
-
-        //    return productslist;
-        //}
-
 
     }
 }

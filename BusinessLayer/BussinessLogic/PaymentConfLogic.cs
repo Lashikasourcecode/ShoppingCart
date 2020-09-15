@@ -78,17 +78,10 @@ namespace BusinessLayer.BussinessLogic
 
                             int orderItemId = orderDetail.OrderDtailId;
 
-                            // ProductDetails productDetails = new ProductDetails();
-                            // {
-
-                            // }
+                           
 
                         }
-                        //endforeach
-
-
-                        // foreach (var paymt in payments)
-                        // {
+                       
                         Payment payment = new Payment();
                         {
                             payment.Amount = payments.total;
@@ -97,7 +90,7 @@ namespace BusinessLayer.BussinessLogic
                             context.Payments.Add(payment);
                             context.SaveChanges();
                         }
-                        // }
+                        
                     }
 
 

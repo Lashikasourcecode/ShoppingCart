@@ -12,9 +12,6 @@ namespace BusinessLayer.BussinessLogic
     {
         private IProducts _productlist = new DataAccessLayer.Function.ShoppingCartDBFunction();
 
-        //public DataAccessLayer dataAccess = new DataAccessLayer()
-
-
         public async Task<List<Product>> GetAllProduct()
         {
             List<Product> products = await _productlist.GetAllProducts();

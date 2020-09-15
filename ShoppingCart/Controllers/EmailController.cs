@@ -15,12 +15,7 @@ namespace ShoppingCart.Controllers
     [ApiController]
     public class EmailController : ControllerBase
     {
-        //private readonly IEmailSender _emailSender;
-
-        //public EmailController(IEmailSender emailSender)
-        //{
-        //    _emailSender = emailSender;
-        //}
+       
 
         private readonly IMailServicea mailService;
 
@@ -30,21 +25,6 @@ namespace ShoppingCart.Controllers
         }
 
 
-       // [Route("email")]
-       // [HttpGet]
-       //// public async Task<IEnumerable<ProductDetails>> Get()
-       // public async Task Get()
-       // {
-       //     ProductDetails productDetails = new ProductDetails();
-
-       //     var message = new Message(new string[] { "dlashika86@gmail.com" }, "Test email async", "This is the content from our async email.", null);
-       //     await _emailSender.SendEmailAsync(message);
-
-            
-
-
-
-       // }
         
         [Route("email")]
         [HttpPost]

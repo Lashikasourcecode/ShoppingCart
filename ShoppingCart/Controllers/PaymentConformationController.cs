@@ -33,8 +33,7 @@ namespace ShoppingCart.Controllers
         [HttpPost]
         public async Task<bool> PaymentConf(PaymentConformation payments)
         {
-            //var listOfObjectsResult = Json.Decode<List<DataType>>(JsonData);
-            //PaymentConformation payments
+            
 
             PaymentConfLogic paymentCofom = new PaymentConfLogic();
 

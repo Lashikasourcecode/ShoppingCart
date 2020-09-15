@@ -21,7 +21,7 @@ namespace ShoppingCart.Controllers
             icheckoutService = checkoutService;
         }
 
-        // List<ProductDetails> productlist = new List<ProductDetails>();
+        
        
         List<CartItemDetails> cartproductlist = new List<CartItemDetails>();
 
@@ -58,25 +58,6 @@ namespace ShoppingCart.Controllers
 
             return cartitemList.ToList();
         }
-        // public ProductDetails checkquantity(ProductDetails products)
-        // {
-        //    //var p
-        //    var productlist =  icheckoutService.checkProductAvailabilty(products);
-
-        //    if (productlist != null)
-        //    {
-        //     //   // p.ProductId = productId;
-
-        //    }
-
-        //    //return  productlist;
-
-        //    return products;
-
-          
-
-
-
-        //}
+       
     }
 }

@@ -44,16 +44,7 @@ namespace BusinessLayer.BussinessLogic
                    
             }
 
-            // var userdetails = customerDetailsdb.SingleOrDefault(x => x.CustomerId == customerid);
-
-
-
-
-
-            // var users = userdetails.Where
-
-
-            // Customer customeravailability = customer.Where(x => x.Email == customerDetails.Email).FirstOrDefault();
+           
 
             return customerDetailslist;
 

@@ -9,11 +9,10 @@ namespace DataAccessLayer.Interface
 {
     public interface IUser
     {
-        //Task<int> CheckUser(Customer customer);
-        // Task<List<Customer>> CheckUser(Customer customer);
+        
         IEnumerable<Customer> GetAll();
         
 
-        // Task<AuthenticationResponse> userLogin(AuthenticationRequest model)
+       
     }
 }
